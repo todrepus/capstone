@@ -1,0 +1,23 @@
+{
+  "name": "capstone",
+  "version": "0.0.1",
+  "description": "boilerplate for capstone",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack serve"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "4.6.0",
+    "css-loader": "^5.2.7",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.1"
+  }
+}
