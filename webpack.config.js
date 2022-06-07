@@ -14,11 +14,11 @@ plugins = [...., new CopyWebpackPlugin([{from:"", to:""}])] 로 등록하면됨.
 */
 module.exports = {
   entry: {
-    "entry" : "./src/js/entry.js"
+    "entry" : "./src/my/js/entry.js"
   },
   mode: 'development',
   output: {
-    filename: "js/[name].js",
+    filename: "my/js/[name].js",
     path: path.resolve(__dirname, 'dist')   
   },
   module: {
