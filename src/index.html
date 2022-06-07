@@ -152,6 +152,14 @@
 
 		let webcam, labelContainer;
 		let models = [];
+		let disease = [
+			'모낭사이홍반',
+			'모낭홍반농포',
+			'미세각질',
+			'비듬',
+			'탈모',
+			'피지과다'
+		]
 
 		let use_webcam = true;
 		// now only 1
@@ -195,16 +203,19 @@
 			const xx = [img];
 			for (let m = 0; m < MODEL_COUNT; m++){
 				const prediction = await models[m].predict(tf.stack(xx));
-				let classPrediction = prediction;
-				alert(`${classPrediction}`);
-				console.log(await classPrediction.data());
-				let x = await classPrediction.data();
+				let tensor = await prediction.data();
+				let max_idx = 0;
 				for (let i = 0; i < maxPredictions; i++) {
-					console.log(x[i]);
-					//const classPrediction =
-					//	`Model m : ${m} / ` + prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+					const classPrediction =
+						`Model ${disease[m]} / ` + `prob : ${tensor[i]}`;
+					console.log(classPrediction);
+					if (tensor[i] > tensor[max_idx]){
+						max_idx = i;
+					}
 					//labelContainer.childNodes[i].innerHTML = classPrediction;
 				}
+				console.log(`Model ${disease[m]} predicted to class ${max_idx}`);
+				console.log('=========================');
 			}
 		}
 		
