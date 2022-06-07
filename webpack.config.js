@@ -14,7 +14,8 @@ plugins = [...., new CopyWebpackPlugin([{from:"", to:""}])] 로 등록하면됨.
 */
 module.exports = {
   entry: {
-    "entry" : "./src/my/js/entry.js"
+    "entry" : "./src/my/js/entry.js",
+    "model" : "./src/my/js/model.js"
   },
   mode: 'development',
   output: {
