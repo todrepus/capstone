@@ -59,15 +59,6 @@ const Slider = {
 const ResultView = {
     predicts : [],
     disease_idx : 0,
-    init : function () {
-        const results = sessionStorage.getItem('predicts');
-        if (!results){
-            location.href = 'index.html';
-        }
-
-        this.predicts = JSON.parse(results);
-    },
-
     update : function(){
         for (const predict of this.predicts) {
             const m = predict.m;
@@ -77,6 +68,13 @@ const ResultView = {
     },
 
     init : function(){
+        const results = sessionStorage.getItem('predicts');
+        if (!results){
+            location.href = 'index.html';
+        }
+
+        this.predicts = JSON.parse(results);
+
         for (let i=1; i<=MODEL_COUNT; i++){
             const result_div = document.getElementById('result' + i);
             let slides = result_div.querySelectorAll(".mySlides");
@@ -90,7 +88,8 @@ const ResultView = {
             d_explain.innerHTML = DISEASE_EXPLAIN[i-1];
         }
 
-        document.getElementById('disease_name').innerHTML = DISEASES[this.disease_idx];
+        console.log(this.predicts);
+        document.getElementById('disease_name').innerHTML = `${DISEASES[this.disease_idx]} / 증상: ${this.predicts[this.disease_idx].predict}단계`;
         Slider.showSlides(this.disease_idx, Slider.slideIndex);
     }
 
