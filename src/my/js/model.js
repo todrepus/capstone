@@ -1,6 +1,8 @@
 import * as tf from '@tensorflow/tfjs';
 
 const URL = "../../models/";
+
+
 export const DISEASES = [
     '모낭사이홍반',
     '모낭홍반농포',
@@ -8,7 +10,7 @@ export const DISEASES = [
     '비듬',
     '탈모',
     '피지과다'
-]
+];
 
 let webcam, labelContainer;
 let models = [];
@@ -16,9 +18,8 @@ let models = [];
 
 
 let use_webcam = true;
-// now only 1
 const maxPredictions = 4;
-const MODEL_COUNT = 1;
+export const MODEL_COUNT = 1;
 
 // Load the image model and setup the webcam
 
@@ -72,6 +73,7 @@ const Model = {
 
         // 세션스토리지에 저장.
         sessionStorage.setItem('predicts', JSON.stringify(predicts));
+        location.href = 'result.html';
     },
 
     init : async function(){
