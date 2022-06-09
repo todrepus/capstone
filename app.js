@@ -105,7 +105,7 @@ server.post('/login_post', async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     try{
-      const result = await mydb.UserDB.readUserByEmail('Email');
+      const result = await mydb.UserDB.readUserByEmail(email);
       if (!result){
         res.json({status : 'No User'})
         return;
@@ -127,6 +127,18 @@ server.post('/login_post', async (req, res) => {
     }
   }
 });
+
+server.get('/logout',(req, res) => {
+  if (req.session.user){
+    req.session.destroy((err) => {
+      if (err){
+        console.log(err);
+        return;
+      }
+    })
+  }
+  res.redirect('/login');
+})
 
 // 가입요청
 server.post('/join_post', async (req, res) => {
