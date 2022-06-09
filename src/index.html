@@ -15,7 +15,8 @@
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-
+	<!-- tensorflow -->
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 	<script type='module' src="my/js/model.js"></script>
 
 	<script>
@@ -23,6 +24,22 @@
 			await Model.init();
 		}
 	</script>
+	<style>
+		.slider-text{
+			margin: auto;
+		}
+		.center{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+
+		.slider-text-inner{
+			text-align: center;
+		}
+
+	</style>
 </head>
 
 <body>
@@ -56,20 +73,26 @@
 							<div class="overlay-gradient"></div>
 							<div class="container-fluid">
 								<div class="row">
-									<div class="col-md-6 col-md-offset-3 col-md-pull-3 slider-text">
+									<div class="slider-text"> <!--col-md-6 col-md-offset-3 col-md-pull-3 -->
 										<div class="slider-text-inner">
 											<!--여기에 Contents 작성!!!-->
-											<h1>진단</h1>
+											<h1>AI 두피 진단하기</h1>
 											<br>
-											<video  width="320"
-											height="240"
-											autoplay
-											playsinline
-											muted
-											id="webcam-container"></video>
-											<br>
-											<a class="btn btn-primary btn-demo" onclick='(async()=>{await Model.predict();})()'></i>진단</a>
+										<div class="center">
+											<div class="video">
+												<video  width="320"
+												height="240"
+												autoplay
+												playsinline
+												muted
+												id="webcam-container"></video>
 											</div>
+											<br>
+											<div class="dButton">
+												<a class="btn btn-primary btn-demo" onclick='(async()=>{await Model.predict();})()'></i>진단</a>
+											</div>
+										</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -108,7 +131,7 @@
 							</span>
 							<div class="desc">
 								<h3><a href="#"style="font-family: BMDOHYEON;">Development</a></h3>
-								<p style="font-family: BMDOHYEON; color: rgb(119, 119, 119); opacity: 0.8;">백엔드 개발-강현우 <br> 프론트앤드 개발-김현우 이주원 정성한 </p>
+								<p style="font-family: BMDOHYEON; color: rgb(119, 119, 119); opacity: 0.8;">백엔드 개발-강현우 <br> 프론트엔드 개발-김현우 이주원 정성한 </p>
 							</div>
 						</div>
 					</div>

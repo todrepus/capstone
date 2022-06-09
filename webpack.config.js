@@ -1,9 +1,9 @@
-const webpack = require('webpack')
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
 const path = require('path')
 const fs = require('fs')
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-
-
+const nodeExternals = require('webpack-node-externals');
 
 /*
 entry : 모듈 진입점
@@ -48,11 +48,22 @@ module.exports = {
   },
   mode: 'development',
   output: {
-    filename: "my/js/[name].js",
-    path: path.resolve(__dirname, 'dist')   
+    filename: "[name].js",
+    path: path.resolve(__dirname, 'dist'),
+    publicPath : "http://localhost:3000/dist/"   
   },
   module: {
     rules: [
+      {
+        test: /\.js$/, //.js 파일 templating
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
       {
         test: /\.s?css$/,
         use: ['style-loader', 'css-loader']
@@ -60,10 +71,6 @@ module.exports = {
     ]
   },
   plugins: [   
-    new webpack.ProvidePlugin({
-      $ : "jquery",
-      jQuery : "jquery"
-    }),
     new webpack.DefinePlugin({
       SHAMPOO_EXPLAIN : SHAMPOO_EXPLAIN,
       SHAMPOO_IMAGES  : SHAMPOO_IMAGES,
@@ -72,14 +79,4 @@ module.exports = {
     new CopyWebpackPlugin([{ from: "./src"}]),
    
   ],
-  devServer: { 
-    static: {
-    // https://webpack.js.org/configuration/dev-server/#directory
-    directory: path.join(__dirname, 'dist'),
-    }, 
-  compress: true
-  },
-  node: {
-    fs:"empty"
-  }
 }

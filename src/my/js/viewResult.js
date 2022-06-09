@@ -1,4 +1,5 @@
 import {DISEASES, MODEL_COUNT} from './model.js';
+import {SHAMPOO_IMAGES, SHAMPOO_EXPLAIN, DISEASE_EXPLAIN} from './explain.js';
 
 function readTextFile(file)
 {
@@ -43,7 +44,7 @@ const Slider = {
             slides[i].style.display = "none";
         }
         for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
+            dots[i].className = dots[i].className.replace(" active_dot", "");
         }
 
         let s_explain = result_div.querySelector('#shampoo_explain' + (disease_idx+1));
@@ -51,7 +52,7 @@ const Slider = {
         s_explain.innerHTML = SHAMPOO_EXPLAIN[disease_idx][this.slideIndex-1];
 
         slides[this.slideIndex-1].style.display = "block";
-        dots[this.slideIndex-1].className += " active";
+        dots[this.slideIndex-1].className += " active_dot";
     }
 }
 
@@ -81,10 +82,10 @@ const ResultView = {
             for (let j = 0; j<slides.length; j++){
                 const slide = slides[j];
                 const img_tag = slide.querySelector('img');
-                img_tag.setAttribute('src', `../../shampoo/${i}/${SHAMPOO_IMAGES[i-1][j]}`);
+                img_tag.setAttribute('src', `shampoo/${i}/${SHAMPOO_IMAGES[i-1][j]}`);
             }
             //disease_explain1
-            let d_explain = result_div.querySelector('#disease_explain' + (this.disease_idx+1));
+            let d_explain = document.querySelector('#disease_explain' + (this.disease_idx+1));
             d_explain.innerHTML = DISEASE_EXPLAIN[i-1];
         }
 

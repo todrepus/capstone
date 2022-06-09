@@ -1,5 +1,3 @@
-import * as tf from '@tensorflow/tfjs';
-
 const URL = "../../models/";
 
 
@@ -14,8 +12,6 @@ export const DISEASES = [
 
 let webcam, labelContainer;
 let models = [];
-
-
 
 let use_webcam = true;
 const maxPredictions = 4;
@@ -86,7 +82,7 @@ const Model = {
         var handleSuccess = function (stream) {
             webcam.srcObject = stream;
         };
-
+        await navigator.permissions.query({ name: 'camera'/*and 'microphone'*/ })
         navigator.mediaDevices.getUserMedia({ video: true }).then(handleSuccess);
     },
 
