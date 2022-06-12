@@ -110,6 +110,7 @@ server.post('/login_post', async (req, res) => {
         res.json({status : 'No User'})
         return;
       }
+      console.log(result);
       if (password == result.message.password){
         req.session.user = {
           name: result.name,
