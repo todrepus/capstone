@@ -15,7 +15,7 @@ let models = [];
 
 let use_webcam = true;
 const maxPredictions = 4;
-export const MODEL_COUNT = 1;
+export const MODEL_COUNT = 5;
 
 // Load the image model and setup the webcam
 
