@@ -40,7 +40,7 @@ function createContentDivs(){
             <div class="mySlides myfade">
             <div class="numbertext">${j+1} / ${SHAMPOO_IMAGES[i-1].length}</div>
             <img src="shampoo/${i}/${SHAMPOO_IMAGES[i-1][j]}" style="width:100%">
-            <div class="text">샴푸${j+1}</div>
+            <div class="text">${SHAMPOO_EXPLAIN[i-1][j].title}</div>
             </div>
             `
 
@@ -59,7 +59,7 @@ function createContentDivs(){
                 <div class="slideshow-container">
                     <div id='disease_explain${i}'
                         style="font-size: 20px; margin: 0 25px; font-family: BMDOHYEON">
-                        ${DISEASE_EXPLAIN[i-1]};
+                        ${DISEASE_EXPLAIN[i-1]}
                     </div>
                 </div>
                 <div class="recommended" style="margin-top: 80px;" id='result${i}'>
@@ -137,7 +137,7 @@ const Slider = {
 
         let s_explain = result_div.querySelector('#shampoo_explain' + (disease_idx+1));
         
-        s_explain.innerHTML = SHAMPOO_EXPLAIN[disease_idx][this.slideIndex-1];
+        s_explain.innerHTML = SHAMPOO_EXPLAIN[disease_idx][this.slideIndex-1].content;
 
         contents[disease_idx].style.display = "block";
         slides[this.slideIndex-1].style.display = "block";

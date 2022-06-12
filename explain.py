@@ -2,7 +2,7 @@ import json
 import os
 
 
-shampoo_explain = [[],[],[],[],[],[]]
+shampoo_explain = [[] for i in range(6)]
 shampoo_images = [[],[],[],[],[],[]]
 disease_explain = ['``' for i in range(6)]
 for i in range(1, 7):
@@ -15,7 +15,9 @@ for i in range(1, 7):
             with open(path, encoding='utf-8') as f:
                 lines = f.readlines()
 
-            shampoo_explain[i-1].append(f"`{''.join(lines)}`")
+            content = f"`[{lines[0].strip()}]\n{''.join(lines[1:])}`"
+            title = f"`{lines[0]}`"
+            shampoo_explain[i-1].append({'title' : title, 'content' : content})
         else:
             shampoo_images[i-1].append(f"`{file}`")
 

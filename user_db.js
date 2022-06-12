@@ -1,23 +1,24 @@
 const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs');
 
 
 
-/*
 //테이블 생성코드
-let db = new sqlite3.Database('src/db/user.db');
-db.run(`CREATE TABLE User(id integer primary key,
-     name text not null,
-     password text not null,
-     nickname text unique,
-     phone_number text unique,
-     email text unique)`,
-    function(err) {
-        if (err){
-            return console.log(err.message);
-        }
-    });
-db.close();
-*/
+if (!fs.existsSync('src/db/user.db')){
+    let db = new sqlite3.Database('src/db/user.db');
+    db.run(`CREATE TABLE User(id integer primary key,
+        name text not null,
+        password text not null,
+        nickname text unique,
+        phone_number text unique,
+        email text unique)`,
+        function(err) {
+            if (err){
+                return console.log(err.message);
+            }
+        });
+    db.close();
+}
 
 
 
