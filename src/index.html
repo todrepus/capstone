@@ -86,12 +86,12 @@
 													const div2 = document.getElementById('upload_div');
 													const predictBtn = document.getElementById('predict');
 													if (event.target.checked){
-														div.style.visibility = "visible";
-														div2.style.visibility = "hidden";
+														div.style.display = "block";
+														div2.style.display = "none";
 														predictBtn.onclick = async()=>{await Model.predict();};
 													}else{
-														div.style.visibility = "hidden";
-														div2.style.visibility = "visible";
+														div.style.display = "none";
+														div2.style.display = "block";
 														predictBtn.onclick = async()=>{await Model.predictByIm(im);};
 													}
 												}
@@ -126,10 +126,10 @@
 													
 												}
 											</script>
-											<label class="switch">
-												<input type="checkbox" checked onchange="switchToggle(event);">
-												<span class="slider round"></span>
-											</label>
+												<label class="switch">
+													<input type="checkbox" checked onchange="switchToggle(event);">
+													<span class="slider round"></span>
+												</label>
 											<br>
 										<div class="center">
 											<div class="video" id='video_div'>
@@ -140,14 +140,14 @@
 												muted
 												id="webcam-container"></video>
 											</div>
-											<div id='upload_div' style='visibility:hidden;'>
+											<div id='upload_div' style='display:none;'>
 												<input type="file" class="form-control" id="upload_target"
                                 					aria-describedby="Image" onchange="uploadImage(event);" placeholder='Img'>
 												<img id='uploaded_img'>
 											</div>
 											<br>
 											<div class="dButton">
-												<a id='predict' class="btn btn-primary btn-demo" onclick='(async()=>{await Model.predict();})()'></i>진단</a>
+												<a id='predict' class="btn btn-primary btn-info" onclick='(async()=>{await Model.predict();})()' style="font-weight: 400; border-radius: 10px;"></i>&nbsp;&nbsp;&nbsp;진단&nbsp;&nbsp;&nbsp;</a>
 											</div>
 										</div>	
 										</div>
@@ -246,11 +246,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #aaa;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
+input:not(:checked) + .slider::before{
+	content: "Img";
+}
 .slider:before {
   position: absolute;
   content: "Cam";
