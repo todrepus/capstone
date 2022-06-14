@@ -41,12 +41,13 @@ const Model = {
     predict : async function() {
         // predict can take in an image, video or canvas html element
 
+
         const webcam2 = await tf.data.webcam(webcam, {
             resizeWidth: 224,
             resizeHeight: 224,
         });
         let img = await webcam2.capture();
-        const xx = [img];
+        const xx = [img.div(tf.scalar(255))];
 
         let predicts = [];
         
@@ -71,6 +72,34 @@ const Model = {
         sessionStorage.setItem('predicts', JSON.stringify(predicts));
         location.href = 'result.html';
     },
+
+    predictByIm : async function(im){   
+        const a = tf.browser.fromPixels(im).resizeBilinear([224,224]).div(tf.scalar(255));
+        const xx = [a];
+        let predicts = [];
+        console.log(tf.stack(xx).shape);
+                for (let m = 0; m < MODEL_COUNT; m++){
+                    const prediction = await models[m].predict(tf.stack(xx));
+                    let tensor = await prediction.data();
+                    let max_idx = 0;
+                    for (let i = 0; i < maxPredictions; i++) {
+                        const classPrediction =
+                            `Model ${DISEASES[m]} / ` + `prob : ${tensor[i]}`;
+                        console.log(classPrediction);
+                        if (tensor[i] > tensor[max_idx]){
+                            max_idx = i;
+                        }
+                    }
+                    predicts.push({model_idx : m, predict : max_idx});
+                    console.log(`Model ${DISEASES[m]} predicted to class ${max_idx}`);
+                    console.log('=========================');
+                }
+        
+                // 세션스토리지에 저장.
+                sessionStorage.setItem('predicts', JSON.stringify(predicts));
+                location.href = 'result.html';
+    },
+
 
     init : async function(){
         webcam = document.getElementById('webcam-container');
